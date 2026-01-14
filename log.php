@@ -1,13 +1,11 @@
 <?php
-function logScan($job, $action, $version = "-") {
-  $line = implode(" | ", [
-    date("Y-m-d H:i:s"),
-    $_SERVER['REMOTE_ADDR'] ?? "-",
-    $job,
-    $action,
-    $version,
-    $_SERVER['HTTP_USER_AGENT'] ?? "-"
-  ]) . PHP_EOL;
+date_default_timezone_set('Asia/Bangkok');
 
-  file_put_contents("logs/scan.log", $line, FILE_APPEND);
+function logScan($job, $mode, $extra = '-') {
+    $time = date("Y-m-d H:i:s");
+    $ip   = $_SERVER['REMOTE_ADDR'] ?? '-';
+    $ua   = $_SERVER['HTTP_USER_AGENT'] ?? '-';
+
+    $line = "$time | $ip | $job | $mode | $extra | $ua\n";
+    file_put_contents(__DIR__ . "/logs/scan.log", $line, FILE_APPEND);
 }
