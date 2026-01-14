@@ -6,3 +6,7 @@ logScan($job, "auto");
 
 header("Location: " . $DOCS[$job]['latest']);
 exit;
+
+
+// echo "AUTO MODE OK<br>";
+// echo "Job: " . $job;
