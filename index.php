@@ -1,23 +1,26 @@
 <?php
-require "config.php";
+require_once __DIR__ . "/config.php";
 
-$job = $_GET['job'] ?? DEFAULT_JOB;
-
-if (!isset($DOCS[$job])) {
-  http_response_code(404);
-  exit("Job not found");
-}
+/*
+ * index.php
+ * ทำหน้าที่เลือก mode เท่านั้น
+ * ไม่ยุ่งกับ job / data.json
+ */
 
 switch (MODE) {
-  case "auto":
-    include "mode/auto.php";
-    break;
+    case "auto":
+        require __DIR__ . "/mode/auto.php";
+        break;
 
-  case "select":
-    include "mode/select.php";
-    break;
+    case "select":
+        require __DIR__ . "/mode/select.php";
+        break;
 
-  case "schedule":
-    include "mode/schedule.php";
-    break;
+    case "schedule":
+        require __DIR__ . "/mode/schedule.php";
+        break;
+
+    default:
+        http_response_code(500);
+        exit("Invalid mode");
 }
